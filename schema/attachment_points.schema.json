@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "attachment_points/1.0",
+  "title": "AttachmentPoints",
+  "description": "Schema for .points.json files produced by aseprite_slices_to_points.py (v1.0)",
+  "type": "object",
+  "required": ["_schema", "source_image", "sprite_size", "origin", "attachment_points"],
+  "properties": {
+    "_schema": {
+      "type": "string",
+      "description": "Schema identifier and version, e.g. 'attachment_points/1.0'",
+      "pattern": "^attachment_points/\\d+\\.\\d+$"
+    },
+    "source_image": {
+      "type": "string",
+      "description": "Filename of the spritesheet image this data describes"
+    },
+    "sprite_size": {
+      "type": "object",
+      "description": "Full pixel dimensions of the sprite canvas",
+      "required": ["w", "h"],
+      "properties": {
+        "w": { "type": "number", "minimum": 1 },
+        "h": { "type": "number", "minimum": 1 }
+      }
+    },
+    "origin": {
+      "type": "object",
+      "description": "The rotation/anchor pivot point, derived from the 'Origin' Aseprite slice",
+      "required": ["raw", "phaser_origin"],
+      "properties": {
+        "raw": {
+          "type": "object",
+          "description": "Pixel-center of the Origin slice in sprite canvas space",
+          "required": ["x", "y"],
+          "properties": {
+            "x": { "type": "number" },
+            "y": { "type": "number" }
+          }
+        },
+        "phaser_origin": {
+          "type": "object",
+          "description": "Normalised 0-1 values for use with Phaser's sprite.setOrigin(x, y)",
+          "required": ["x", "y"],
+          "properties": {
+            "x": { "type": "number", "minimum": 0, "maximum": 1 },
+            "y": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        }
+      }
+    },
+    "attachment_points": {
+      "type": "array",
+      "description": "Named game-logic points expressed relative to Origin",
+      "items": {
+        "type": "object",
+        "required": ["name", "raw", "offset", "distance", "angle_deg"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Slice name from Aseprite (becomes the lookup key at runtime)"
+          },
+          "raw": {
+            "type": "object",
+            "description": "Absolute pixel center of the slice in sprite canvas space",
+            "required": ["x", "y"],
+            "properties": {
+              "x": { "type": "number" },
+              "y": { "type": "number" }
+            }
+          },
+          "offset": {
+            "type": "object",
+            "description": "Pixel offset from Origin. +x = right, +y = down (screen space convention)",
+            "required": ["x", "y"],
+            "properties": {
+              "x": { "type": "number" },
+              "y": { "type": "number" }
+            }
+          },
+          "distance": {
+            "type": "number",
+            "description": "Euclidean distance from Origin in pixels",
+            "minimum": 0
+          },
+          "angle_deg": {
+            "type": "number",
+            "description": "Angle from Origin to this point (atan2, degrees, screen-space: 0=right, 90=down)"
+          }
+        }
+      }
+    }
+  }
+}

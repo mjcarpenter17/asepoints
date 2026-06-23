@@ -1,0 +1,46 @@
+{
+  "_schema": "attachment_points/1.0",
+  "source_image": "Turret_1-sheet.png",
+  "sprite_size": {
+    "w": 200,
+    "h": 539
+  },
+  "origin": {
+    "raw": {
+      "x": 99.0,
+      "y": 422.0
+    },
+    "phaser_origin": {
+      "x": 0.495,
+      "y": 0.782931
+    }
+  },
+  "attachment_points": [
+    {
+      "name": "Barrel_02",
+      "raw": {
+        "x": 53.5,
+        "y": 16.5
+      },
+      "offset": {
+        "x": -45.5,
+        "y": -405.5
+      },
+      "distance": 408.0447,
+      "angle_deg": -96.4022
+    },
+    {
+      "name": "Barrel_01",
+      "raw": {
+        "x": 141.0,
+        "y": 20.5
+      },
+      "offset": {
+        "x": 42.0,
+        "y": -401.5
+      },
+      "distance": 403.6908,
+      "angle_deg": -84.0281
+    }
+  ]
+}
